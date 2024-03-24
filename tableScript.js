@@ -1,23 +1,22 @@
 let groups = document.querySelectorAll(".group")
 let tableContainer = document.querySelector(".tableExtraContainer")
 
-//For adding new group
 let groupContainer = document.querySelector(".groupTask")
-let groupTitle = document.querySelector("#groupTitleText")
+let groupTitle = document.querySelector("#groupTitleText") //This is for the title of the group
 let addGroupBtn = document.querySelector(".addGroupBtn")
 
+//This function is for when the user types in a title on the left tab
+//and presses enter, adding a new group.
+//Also creates a new table on the right hand side
 addGroupBtn.addEventListener("click", function(){
     let newGroupTitle = groupTitle.value;
 
     if(newGroupTitle === ""){
         return
     }else{
-
-        //For entire Group
         let group = document.createElement("div")
         group.classList = "group"
 
-        //For Group Box
         let groupTitleDiv = document.createElement("div")
         groupTitleDiv.classList = "groupTitle"
 
@@ -38,14 +37,17 @@ addGroupBtn.addEventListener("click", function(){
         createTable(newGroupTitle);
 
     }
-
-    console.log(groups);
 })
 
+//This function is for updating the groups array
+//When user adds a new group, the group array is updated
 function updateGroupsArray(){
     groups = document.querySelectorAll(".group")
 }
 
+//This function is used in the "addGroupBtn.addEventListener..."
+//It's what helps add a new table on the right hand side
+//When a user adds a new group
 function createTable(tableTitle){
     let table = document.createElement("div")
     table.classList = "table"
@@ -78,23 +80,29 @@ function createTable(tableTitle){
     let newBox = document.createElement("div")
     newBox.classList = "newBox"
 
-    //For adding new rows
+    //-- This handles adding a new row to the table
+    //This is for the "Create task" button in the (right-side) table view
     createNewTask.addEventListener("click", function(){
+        //When user clicks on the "Create task button"
+        //It opens up the overlay with the input text field
         if(createNewTask.classList != "active"){
             newBox.style.display = "block";
             createNewTask.classList.add("active")
         }
     })
 
+    //This is for the input text field that appears after clicking
+    //the "Create task" button.
     newBox.addEventListener("keyup", function(event){
         let textInput = newBox.querySelector("input").value;
 
+        //If the user clicks enter
         if(event.keyCode == 13){
-            if(textInput == ""){
+            if(textInput == ""){ //And the text field is empty, then the text field will disappear
                 newBox.style.display = "none"
                 createNewTask.classList.remove("active")
-            }else{
-                //Add new row function
+            }else{ //If the text field is not empty when user clicks enter
+                //A new row is added 
                 let row = document.createElement("tr")
 
                 let taskTitle = document.createElement("td")
@@ -129,13 +137,13 @@ function createTable(tableTitle){
                 row.appendChild(taskProgress)
 
                 tbody.appendChild(row)
-                //Add new row function
             }
 
         }
     })
-    //For adding new rows
+    //-- This handles adding a new row to the table
 
+    //This is for the overlay text input field
     let input = document.createElement("input")
     input.setAttribute("type", "text")
     input.setAttribute("placeholder", "What is the task you want to add?")
@@ -148,6 +156,28 @@ function createTable(tableTitle){
 
     table.appendChild(createNewTask)
     
+    //Lastly, all information about new row is added into the table container
     tableContainer.appendChild(table)
 }
 
+//When the user adds a group (using tab on left-side)
+//A new object must be created
+
+//For example; the user adds "Database development" group
+//Which will make object below ->
+
+// "Database development": {
+// }
+
+//When the user adds a new task / row inside the Database development table (right-side)
+//That should be added to the "Database development" object
+
+//For example; the user adds "Create Database using JSON server" task
+//Which will make the object below ->
+
+// "Database development": {
+//      "taskID": {
+//          title: "Create Database using JSON server"
+//          progress: "TO DO"
+//      }
+// }
