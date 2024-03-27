@@ -35,7 +35,6 @@ addGroupBtn.addEventListener("click", function(){
 
         updateGroupsArray();
         createTable(newGroupTitle);
-
     }
 })
 
@@ -181,3 +180,30 @@ function createTable(tableTitle){
 //          progress: "TO DO"
 //      }
 // }
+
+
+// let gName = document.getElementsByTagName("p")
+
+//For searching
+function search(){
+    
+    let searchBox = document.getElementById("search-bar-text").value.toUpperCase();
+    let tables = document.querySelectorAll(".table")
+    
+
+    for(let i = 0; i < tables.length; i++){
+        const titleContainer = tables[i].querySelector(".titleContainer")
+        const title = titleContainer.querySelector("p")
+
+        if(title){
+            const textValue = title.textContent.toUpperCase()
+
+            if(textValue.indexOf(searchBox) > -1){
+                tables[i].style.display = "";
+            }else{
+                tables[i].style.display = "none";
+            }
+        }
+    }
+
+}

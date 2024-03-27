@@ -44,3 +44,28 @@ function getDragAfterElement(container, y){
         }
     }, { offset: Number.NEGATIVE_INFINITY }).element
 }
+
+//For searching
+function search(){
+
+    const searchBox = document.getElementById("search-bar-text").value.toUpperCase();
+    const box = document.querySelectorAll(".box");
+    const bName = document.getElementsByClassName("boxTitle");
+
+    for(let i = 0; i < box.length; i++){
+
+        let match = box[i].getElementsByClassName("boxTitle")[0];
+
+        if(match){
+            let textValue = match.textContent || match.innerHTML;
+
+            if(textValue.toUpperCase().indexOf(searchBox) > -1){
+                box[i].style.display = "";
+            }else{
+                box[i].style.display = "none";
+            }
+        }
+
+    }
+
+}
