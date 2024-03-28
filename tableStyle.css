@@ -88,12 +88,72 @@ body{
     overflow:hidden;
 }
 
+.groupTitle i{
+    transition: 0.3s cubic-bezier(.17,.67,.42,1.04);
+}
+
 .groupTitle{
     display: flex;
     align-items: center;
     gap: 10px;
     height: 30px;
     cursor: pointer;
+    transition: 0.3s cubic-bezier(.17,.67,.42,1.04);
+}
+
+.group .date{
+    display: none;
+}
+
+.group .date div{
+    display: flex;
+    align-items: center;
+}
+
+.date div .dueDate{
+    background-color: #F7F8F9;
+    border: 1px solid transparent;
+    outline: none;
+    width: 150px;
+    border-radius: 5px;
+    padding: 5px;
+    font-family: "Inter", sans-serif;
+    font-size: 13.33px;
+    font-weight: 500;
+}
+
+.group .date div:not(:last-child){
+    margin-bottom: 10px;
+}
+
+.group .date div label{
+    display: block;
+    font-family: "Inter", sans-serif;
+    font-size: 13.33px;
+    font-weight: 500;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.group .date div{
+    display: flex;
+    gap: 15px;
+}
+
+.group.active{
+    height: auto;
+}
+
+.group.active .date{
+    display: block;
+}
+
+.group.active .groupTitle i{
+    transform: rotate(90deg);
+}
+
+.group.active .groupTitle{
+    margin-bottom: 10px;
 }
 
 .addGroupBtn{
@@ -153,7 +213,7 @@ body{
 .tableExtraContainer{
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 20px;
 
     width: calc(100vw - 465px);
     height: 100%;
@@ -181,7 +241,7 @@ body{
     margin-bottom: 20px;
 }
 
-.table .titleContainer #dueDate{
+.table .titleContainer .tableDueDate{
     color: #8b8e94;
 }
 

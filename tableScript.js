@@ -30,11 +30,64 @@ addGroupBtn.addEventListener("click", function(){
         groupTitleDiv.appendChild(title)
         
         group.appendChild(groupTitleDiv)
+
+        //For due date
+        let date = document.createElement("div")
+        date.classList = "date"
+
+        //From: 
+        let divOne = document.createElement("div")
+        let labelOne = document.createElement("label")
+        labelOne.innerHTML = "Due Date:"
+
+        let inputOne = document.createElement("input")
+        inputOne.setAttribute("type", "date")
+        inputOne.classList = "dueDate"
+        inputOne.addEventListener("blur", function(){
+            let dateArr = inputOne.value.split("-")
+            
+            if(dateArr.length > 1){
+                let tableArr = document.querySelectorAll(".table")
+
+                for(let i = 0; i < tableArr.length; i++){
+
+                    if(tableArr[i].querySelector(".titleContainer p").innerHTML === newGroupTitle){
+                        tableArr[i].querySelector(".titleContainer .tableDueDate").innerHTML = `${dateArr[1]} / ${dateArr[2]} / ${dateArr[0]}`
+                    }
+
+                    console.log(newGroupTitle);
+                }
+            }
+
+        })
+
+        divOne.appendChild(labelOne)
+        divOne.appendChild(inputOne)
+
+        date.appendChild(divOne)
+
+        group.appendChild(date)
+
+        group.addEventListener("click", function(e){
+
+            if(e.target.parentNode.classList[0] === "group" || e.target.parentNode.classList[0] === "groupTitle"){
+                if(group.classList.contains("active")){
+                    group.classList.remove("active")
+                }else{
+                    group.classList.add("active")
+                }
+            }else{
+                return
+            }
+
+        })
         
         groupContainer.appendChild(group)
 
         updateGroupsArray();
         createTable(newGroupTitle);
+
+        groupTitle.value = "";
     }
 })
 
@@ -55,8 +108,12 @@ function createTable(tableTitle){
     titleContainer.classList = "titleContainer"
     let title = document.createElement("p")
     title.innerHTML = tableTitle
+    let dueDate = document.createElement("p")
+    dueDate.classList = "tableDueDate"
+    dueDate.innerHTML = "Date not set" 
 
     titleContainer.appendChild(title)
+    titleContainer.appendChild(dueDate)
     table.appendChild(titleContainer)
 
     let contentTable = document.createElement("table")
@@ -159,31 +216,6 @@ function createTable(tableTitle){
     tableContainer.appendChild(table)
 }
 
-//When the user adds a group (using tab on left-side)
-//A new object must be created
-
-//For example; the user adds "Database development" group
-//Which will make object below ->
-
-// "Database development": {
-// }
-
-//When the user adds a new task / row inside the Database development table (right-side)
-//That should be added to the "Database development" object
-
-//For example; the user adds "Create Database using JSON server" task
-//Which will make the object below ->
-
-// "Database development": {
-//      "taskID": {
-//          title: "Create Database using JSON server"
-//          progress: "TO DO"
-//      }
-// }
-
-
-// let gName = document.getElementsByTagName("p")
-
 //For searching
 function search(){
     
@@ -207,3 +239,15 @@ function search(){
     }
 
 }
+
+// //For getting date
+// function getDateValue(e){
+//     var dateArr = e.srcElement.value.split("-")
+
+//     console.log(e.srcElement)
+
+//     if(dateArr.length > 1){
+//         //mm/dd/yyyy
+//         console.log(`${dateArr[1]} / ${dateArr[2]} / ${dateArr[0]}`);
+//     }
+// }
