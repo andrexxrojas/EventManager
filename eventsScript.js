@@ -35,6 +35,39 @@ submitBtn.addEventListener("click", function(){
     meeting.appendChild(meetingDate)
     meeting.appendChild(meetingTime)
 
+    let btns = document.createElement("div");
+    let btnOne = document.createElement("button");
+    btnOne.innerHTML = "Edit";
+    let btnTwo = document.createElement("button");
+    btnTwo.innerHTML = "Delete";
+
+    btns.appendChild(btnOne);
+    btns.appendChild(btnTwo);
+
+    meeting.appendChild(btns);
+
+    let isEditing = false;
+
+    btnOne.addEventListener("click", function(){
+        if(isEditing == false){
+            title.contentEditable = true;
+            description.contentEditable = true;
+
+            btnOne.innerHTML = "Editing";
+            isEditing = true;
+        }else{
+            title.contentEditable = false;
+            description.contentEditable = false;
+
+            btnOne.innerHTML = "Edit";
+            isEditing = false;
+        }
+    })
+
+    btnTwo.addEventListener("click", function(){
+        meeting.remove();
+    })
+
     container.appendChild(meeting)
     }
 

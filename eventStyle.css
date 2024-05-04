@@ -138,13 +138,32 @@ body{
 }
 
 .meeting{
-    height: auto;
-    width: 350px;
+    min-height: 100px;
+    width: auto;
     padding: 15px;
     border-radius: 5px;
     position: relative;
     background-color: #121212;
     color: #FFFFFF;
+}
+
+.meeting div{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.meeting div button{
+    font-family: "Inter", sans-serif;
+    font-size: 13.33px;
+    font-weight: 500;
+    height: 30px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 0 10px;
+    margin-left: 10px;
 }
 
 .description{ 
@@ -181,12 +200,16 @@ body{
     width: 50vw;
     display: grid;
     gap: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    grid-row-gap: none;
+    grid-template-columns: repeat(1, 1fr);
+    grid-row-gap: 10px;
 }
 
-@media only screen and (max-width: 900px){
+@media only screen and (max-width: 1490px){
     .extraContainer{
         flex-direction: column;
+    }
+
+    .meeting{
+        width: 380px;
     }
 }
