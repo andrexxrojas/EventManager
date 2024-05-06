@@ -192,6 +192,34 @@ function createTable(tableTitle){
                 row.appendChild(taskTitle)
                 row.appendChild(taskProgress)
 
+                // New addition
+                let editBtn = document.createElement("td")
+                editBtn.classList = "editBtn";
+                editBtn.innerHTML = "Edit";
+
+                let isEditing = false;
+
+                editBtn.addEventListener("click", function(){
+                    if(isEditing == false){
+                        taskTitle.contentEditable = true;
+                        isEditing = true;
+                    }else if(isEditing == true){
+                        taskTitle.contentEditable = false;
+                        isEditing = false;
+                    }
+                })
+
+                let deleteBtn = document.createElement("td")
+                deleteBtn.classList = "deleteBtn";
+                deleteBtn.innerHTML = "Delete";
+
+                deleteBtn.addEventListener("click", function(){
+                    row.remove();
+                })
+
+                row.appendChild(editBtn);
+                row.appendChild(deleteBtn);
+
                 tbody.appendChild(row)
             }
 

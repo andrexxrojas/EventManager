@@ -331,4 +331,38 @@ body{
     width: 200px;
 }
 
+.editBtn{
+    cursor: pointer;
+    position: relative;
+}
 
+.editBtn::before{
+    content: "";
+    height: 30px;
+    width: 50px;
+    border-radius: 10px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 1px solid black;
+}
+
+.deleteBtn{
+    cursor: pointer;
+    position: relative;
+}
+
+.deleteBtn::before{
+    content: "";
+    position: absolute;
+    height: 30px;
+    width: 60px;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 1px solid black;
+    border-radius: 10px;
+    z-index: 0;
+    transition: 0.3s ease;
+}
